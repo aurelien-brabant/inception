@@ -1,0 +1,10 @@
+version: "3"
+services:
+  mariadb:
+    build:
+      context: ./mariadb
+    image: mariadb
+    environment:
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
