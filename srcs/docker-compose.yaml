@@ -1,10 +1,32 @@
 version: "3"
 services:
+  wordpress:
+    build:
+      context: ./wordpress
+    image: wordpress
+    container_name: inception/wordpress
+    environment:
+      - WORDPRESS_URL=${WORDPRESS_URL}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+    depends_on:
+      - mariadb
   mariadb:
     build:
       context: ./mariadb
+    container_name: inception/mariadb
     image: mariadb
     environment:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
+  nginx:
+    build:
+      context: ./nginx
+    container_name: inception/nginx
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - wordpress 
