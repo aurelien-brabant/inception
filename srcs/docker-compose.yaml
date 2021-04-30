@@ -4,7 +4,7 @@ services:
     build:
       context: ./wordpress
     image: wordpress
-    container_name: inception/wordpress
+    container_name: "inception_wordpress"
     environment:
       - WORDPRESS_URL=${WORDPRESS_URL}
       - MARIADB_USER=${MARIADB_USER}
@@ -15,7 +15,7 @@ services:
   mariadb:
     build:
       context: ./mariadb
-    container_name: inception/mariadb
+    container_name: "inception_mariadb"
     image: mariadb
     environment:
       - MARIADB_USER=${MARIADB_USER}
@@ -24,7 +24,7 @@ services:
   nginx:
     build:
       context: ./nginx
-    container_name: inception/nginx
+    container_name: "inception_nginx"
     image: nginx
     ports:
       - "80:80"
