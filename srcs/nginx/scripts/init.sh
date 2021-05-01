@@ -13,6 +13,9 @@ openssl req -newkey rsa:4096				\
 sed -i "s|CERT_TEMPLATE|${CERTS_DIR}/${DOMAIN_NAME}|g" /etc/nginx/http.d/default.conf
 sed -i "s|KEY_TEMPLATE|${CERTS_DIR}/${DOMAIN_NAME}|g" /etc/nginx/http.d/default.conf
 sed -i "s/TLS_VERSION_TEMPLATE/${TLS_VERSION}/g" /etc/nginx/http.d/default.conf
-sed -i "s/SERVER_NAME/${DOMAIN_NAME}/g" /etc/nginx/http.d/default.conf
+sed -i "s/SERVER_NAME_TEMPLATE/${DOMAIN_NAME}/g" /etc/nginx/http.d/default.conf
+sed -i "s/PHP_FPM_HOST_TEMPLATE/${PHP_FPM_HOST}/g" /etc/nginx/http.d/default.conf
+sed -i "s/PHP_FPM_PORT_TEMPLATE/${PHP_FPM_PORT}/g" /etc/nginx/http.d/default.conf
 
+# start nginx without daemonization
 nginx -g "daemon off;"

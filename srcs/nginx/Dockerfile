@@ -9,7 +9,10 @@ RUN		mkdir /run/nginx &&	\
 		chown nginx:nginx /run/nginx
 
 ENV		CERTS_DIR=/etc/openssl	\
-		DOMAIN_NAME=localhost
+		DOMAIN_NAME=localhost	\
+		PHP_FPM_HOST=php-fpm	\
+		PHP_FPM_PORT=9000		\
+		TLS_VERSION=1.3
 
 COPY	./scripts /tmp/scripts
 RUN		chmod -R +x /tmp/scripts
