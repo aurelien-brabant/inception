@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/13 23:04:39 by abrabant          #+#    #+#              #
-#    Updated: 2021/04/29 14:37:29 by abrabant         ###   ########.fr        #
+#    Updated: 2021/05/02 01:10:27 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,6 @@ RUN			chown -R mysql:mysql /tmp/config &&	\
 			chmod +x /tmp/scripts/*.sh
 
 WORKDIR		/tmp/scripts
-
-EXPOSE		3306
 
 USER		mysql
 

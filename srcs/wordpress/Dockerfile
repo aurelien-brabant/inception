@@ -29,7 +29,7 @@ ENV		MARIADB_DATABASE="wordpress"			\
 		MARIADB_HOST="mariadb"					\
 												\
 		WP_URL="http://localhost"				\
-		WP_TITLE="ft-services wordpress server"	\
+		WP_TITLE="wordpress website"			\
 		WP_ADMIN_USER="admin"					\
 		WP_ADMIN_PWD="admin"					\
 		WP_ADMIN_EMAIL="example@example.com"
@@ -49,7 +49,5 @@ COPY	./config/www.conf /etc/php7/php-fpm.d/www.conf
 
 COPY	./scripts/init.sh /init.sh
 RUN		chmod +x /init.sh
-
-EXPOSE	9000
 
 CMD		[ "/init.sh" ]

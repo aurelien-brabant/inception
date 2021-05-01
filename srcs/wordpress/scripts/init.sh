@@ -1,16 +1,5 @@
 #! /bin/bash
 
-# ----- INIT WORDPRESS DATABASE ----- #
-
-# The wordpress database lives in an external mariadb container which can be
-# reached from the wordpress container by using the hostname MARIADB_HOST (containers
-# must be on the same network obviously).
-# Inititializing the database is required for wordpress to work, but we only
-# want to do it if it's not already done. The wordpress container is new, but we
-# don't know anything about the mariadb one. The wp utility will tell if
-# it is already initialized or not, there's no need to manually check the
-# database.
-
 i=0
 while ! mariadb -h$MARIADB_HOST -u$MARIADB_USER -p$MARIADB_PASSWORD 2> /dev/null; do
 	if [ $i -ge 60 ]; then
@@ -53,6 +42,8 @@ fi
 # php-fpm is a PHP FastCGI implementation. nginx will use it to execute php
 # scripts and return the code of the webpage generated on server side by
 # the PHP code to the end user. This allows dynamic web page rendering.
+
+sed -i "s/listen = 9000/listen = ${PHP_FPM_PORT}/g" /etc/php7/php-fpm.d/www.conf
 
 printf "Starting php-fpm7...\n"
 # ensure daemonization is done, even if it is supposed to be the default
