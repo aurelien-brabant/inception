@@ -6,7 +6,7 @@ services:
     image: wordpress
     container_name: "inception_wordpress"
     environment:
-      - WP_URL=${WORDPRESS_URL}
+      - WP_URL=${WP_URL}
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
@@ -48,5 +48,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${WORDPRESS_HOST_VOLUME_PATH}
+      device: ${WP_HOST_VOLUME_PATH}
       o: bind
