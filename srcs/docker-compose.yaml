@@ -29,7 +29,11 @@ services:
     container_name: "inception_nginx"
     image: nginx
     ports:
-      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - CERTS_DIR=${CERTS_DIR}
+      - TLS_VERSION=${TLS_VERSION}
     volumes:
       - wordpress-volume:/var/www/wordpress
 
