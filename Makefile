@@ -1,43 +1,47 @@
 #!make
 include srcs/.env
-#export $(shell sed 's/=.*//' envfile)
 
+PROJECT_NAME=inception
 RM=rm -rf
-COMPOSE=docker-compose -f srcs/docker-compose.yaml
+COMPOSE=cd srcs && docker-compose -p $(PROJECT_NAME)
+NEW_FILE=touch
 
-all: build $(WORDPRESS_HOST_VOLUME_PATH) $(MARIADB_HOST_VOLUME_PATH) up
+all: .up
 
-build:
-	$(COMPOSE) build	
+$(WORDPRESS_HOST_VOLUME_PATH):
+	mkdir -p $(WORDPRESS_HOST_VOLUME_PATH)
 
-up:
-	$(COMPOSE) up
+$(MARIADB_HOST_VOLUME_PATH):
+	mkdir -p $(MARIADB_HOST_VOLUME_PATH)
+
+.up: $(MARIADB_HOST_VOLUME_PATH) $(WORDPRESS_HOST_VOLUME_PATH)
+	mkdir -p $(WORDPRESS_HOST_VOLUME_PATH)
+	mkdir -p $(MARIADB_HOST_VOLUME_PATH)
+	$(COMPOSE) up -d --build
+	$(NEW_FILE) .up
 
 clean: 
 	$(COMPOSE) down
-	docker rm -f wp_populate_volume
-	docker rm -f mariadb_populate_volume
+	$(RM) .up
+
+# deletes docker volumes, but persistance should remain as ~/data directories
+# are left untouched.
 
 fclean: clean
-	$(RM) $(WORDPRESS_HOST_VOLUME_PATH) $(MARIADB_HOST_VOLUME_PATH)
+	$(COMPOSE) down -v
 
 re: fclean all
 
-# Create a directory with the current wordpress installation, in order to use
-# it as a volume at runtime and allow data to persist.
+#$(WORDPRESS_HOST_VOLUME_PATH):
+#	mkdir -p ~/data
+#	docker run --name wp_populate_volume -d wordpress sleep 60
+#	docker cp wp_populate_volume:/var/www/wordpress $(WORDPRESS_HOST_VOLUME_PATH)
+#	docker kill wp_populate_volume
+#
+#$(MARIADB_HOST_VOLUME_PATH):
+#	mkdir -p ~/data
+#	docker run --name mariadb_populate_volume -d mariadb sleep 60
+#	docker cp mariadb_populate_volume:/var/lib/mysql $(MARIADB_HOST_VOLUME_PATH)
+#	docker kill mariadb_populate_volume
 
-$(WORDPRESS_HOST_VOLUME_PATH):
-	# Give the container 10 seconds for the container to start and for wordpress to be copied
-	mkdir -p $(WORDPRESS_HOST_VOLUME_PATH)
-	docker run --name wp_populate_volume -d wordpress sleep 10
-	docker cp wp_populate_volume:/var/www/wordpress $(WORDPRESS_HOST_VOLUME_PATH)
-	docker kill wp_populate_volume
-
-$(MARIADB_HOST_VOLUME_PATH):
-	# Give the container 15 seconds for the container to start and for DB to be copied
-	mkdir -p $(MARIADB_HOST_VOLUME_PATH)
-	docker run --name mariadb_populate_volume -d mariadb sleep 15
-	docker cp mariadb_populate_volume:/var/lib/mysql $(MARIADB_HOST_VOLUME_PATH)
-	docker kill mariadb_populate_volume
-
-.PHONY: build up clean fclean all re
+.PHONY: build clean fclean all re

@@ -20,6 +20,7 @@ while ! mariadb -h$MARIADB_HOST -u$MARIADB_USER -p$MARIADB_PASSWORD 2> /dev/null
 	i=$((i+1))
 	sleep 1
 done
+#e
 
 echo "Connection to mariadb established.\n"
 
