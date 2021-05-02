@@ -1,7 +1,5 @@
 #! /bin/bash
 
-trap "[ $? -eq 0 ] && tail -f /var/lib/mysql/mariadb.log" EXIT
-
 # This script is executed as the mysql user and _MUST_ be SOURCED
 # The configuration files are found in ../config
 
@@ -27,3 +25,8 @@ fi
 mariadb -e "$(eval "echo \"$(cat ../config/runtime_config.sql)\"")"
 printf "\033[0;32mRuntime configuration has been applied.\033[0m\n"
 touch /tmp/.runtime_config_done
+
+sed -i "s/port = 3306/port = ${MARIADB_PORT}/g" /etc/my.cnf.d/mariadb-server.cnf
+
+pkill mariadbd
+mariadbd

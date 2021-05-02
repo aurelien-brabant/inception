@@ -21,6 +21,7 @@
 #
 # Allow server to accept connections on all interfaces.
 #
+port = 3306
 bind-address=0.0.0.0
 #
 # Optional setting
@@ -41,4 +42,3 @@ general_log_file=mariadb.log
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand
 [mariadb-10.5]
-

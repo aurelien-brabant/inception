@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/13 23:04:39 by abrabant          #+#    #+#              #
-#    Updated: 2021/05/02 01:10:27 by abrabant         ###   ########.fr        #
+#    Updated: 2021/05/02 01:43:46 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ RUN			mariadb-install-db --user=mysql --datadir='/var/lib/mysql'
 
 ENV			MARIADB_USER=mariadb_user			\
 			MARIADB_PASSWORD=mariadb_password	\
-			MARIADB_DATABASE=mariadb_database	
+			MARIADB_DATABASE=mariadb_database	\
+			MARIADB_PORT=3306
 
 COPY  		./config/mariadb-server.cnf  /etc/my.cnf.d/mariadb-server.cnf
 RUN			chown -R mysql:mysql /etc/my.cnf.d

@@ -27,6 +27,7 @@ ENV		MARIADB_DATABASE="wordpress"			\
 		MARIADB_USER="wordpress"				\
 		MARIADB_PASSWORD="wordpress"			\
 		MARIADB_HOST="mariadb"					\
+		MARIADB_PORT=3306						\
 												\
 		WP_URL="http://localhost"				\
 		WP_TITLE="wordpress website"			\

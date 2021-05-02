@@ -15,6 +15,7 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_PORT=${MARIADB_PORT}
       - PHP_FPM_PORT=${PHP_FPM_PORT}
     volumes:
       - wordpress-volume:/var/www/wordpress
@@ -27,6 +28,7 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_PORT=${MARIADB_PORT}
     volumes:
       - mariadb-volume:/var/lib/mysql
   nginx:
