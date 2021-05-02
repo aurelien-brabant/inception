@@ -9,16 +9,15 @@ while ! mariadb -h$MARIADB_HOST -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_PAS
 	i=$((i+1))
 	sleep 1
 done
-#e
 
-echo "Connection to mariadb established.\n"
+printf "Connection to mariadb established.\n"
 
 # ------ INSTALL WORDPRESS _IF_ REQUIRED ------#
 
 if [ "$(mariadb -h${MARIADB_HOST} -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_PASSWORD -e "USE $MARIADB_DATABASE; SHOW TABLES;")" == "" ]; then
 	wp config create --dbhost="$MARIADB_HOST" --dbname="$MARIADB_DATABASE" --dbuser="$MARIADB_USER" --dbpass="$MARIADB_PASSWORD"
 	wp core install --url="$WP_URL:$WP_PORT" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER"	\
-		--admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL"
+		--admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL" --skip-email
 	wp plugin update --all
 	wp theme activate twentytwenty
 
