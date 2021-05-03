@@ -21,7 +21,6 @@ while ! mariadb -h$MARIADB_HOST -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_PAS
 	sleep 1
 done
 
-
 printf "Connection to mariadb established.\n"
 
 # ------ INSTALL WORDPRESS _IF_ REQUIRED ------#

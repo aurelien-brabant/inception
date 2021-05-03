@@ -34,7 +34,10 @@ ENV		MARIADB_DATABASE="wordpress"			\
 		WP_TITLE="wordpress website"			\
 		WP_ADMIN_USER="admin"					\
 		WP_ADMIN_PWD="admin"					\
-		WP_ADMIN_EMAIL="example@example.com"
+		WP_ADMIN_EMAIL="example@example.com"	\
+												\
+		REDIS_HOST="redis"						\
+		REDIS_PORT=6379
 
 RUN		wp core download
 

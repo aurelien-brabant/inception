@@ -19,6 +19,8 @@ services:
       - MARIADB_DATABASE=${MARIADB_DATABASE}
       - MARIADB_PORT=${MARIADB_PORT}
       - PHP_FPM_PORT=${PHP_FPM_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
     volumes:
       - wordpress-volume:/var/www/wordpress
     restart: unless-stopped
@@ -65,6 +67,8 @@ services:
       context: ./redis
     container_name: "inception_redis_wp_cache"
     image: redis
+    environment:
+      - REDIS_PORT=${REDIS_PORT}
 
 volumes:
   mariadb-volume:
