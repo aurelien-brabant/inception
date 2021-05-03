@@ -49,6 +49,7 @@ COPY	./config/www.conf /etc/php7/php-fpm.d/www.conf
 
 # Make the startup script available as /init.sh inside the container
 
+COPY   ./config /tmp/config
 COPY	./scripts/init.sh /init.sh
 RUN		chmod +x /init.sh
 

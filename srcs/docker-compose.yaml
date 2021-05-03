@@ -1,5 +1,7 @@
 version: "3"
+
 services:
+
   wordpress:
     build:
       context: ./wordpress
@@ -20,6 +22,9 @@ services:
     volumes:
       - wordpress-volume:/var/www/wordpress
     restart: unless-stopped
+
+  # ------------------------------------------------------------------------- #
+
   mariadb:
     build:
       context: ./mariadb
@@ -33,6 +38,9 @@ services:
     volumes:
       - mariadb-volume:/var/lib/mysql
     restart: unless-stopped 
+
+  # ------------------------------------------------------------------------- #
+
   nginx:
     build:
       context: ./nginx
@@ -49,6 +57,14 @@ services:
     volumes:
       - wordpress-volume:/var/www/wordpress
     restart: unless-stopped 
+
+  # ------------------------------------------------------------------------- #
+
+  redis:
+    build:
+      context: ./redis
+    container_name: "inception_redis_wp_cache"
+    image: redis
 
 volumes:
   mariadb-volume:

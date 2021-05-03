@@ -1,14 +1,26 @@
 #! /bin/bash
 
+function setup_redis_cache()
+{
+	wp plugin install redis-cache --activate
+	wp plugin update --all
+	cat /tmp/config/redis-config.php ./wp-config.php > .redis_setup_tmp
+	cat .redis_setup_tmp > wp-config.php
+	rm -rf .redis_setup_tmp
+	wp redis enable
+}
+
 i=0
-while ! mariadb -h$MARIADB_HOST -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_PASSWORD 2> /dev/null; do
+while ! mariadb -h$MARIADB_HOST -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_PASSWORD; do
 	if [ $i -ge 60 ]; then
 		printf "Failed to connect to mariadb\n"
+		exit 1
 	fi
 	printf "Trying to reach mariadb... ($i/60 sec)\n"
 	i=$((i+1))
 	sleep 1
 done
+
 
 printf "Connection to mariadb established.\n"
 
@@ -18,7 +30,8 @@ if [ "$(mariadb -h${MARIADB_HOST} -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_P
 	wp config create --dbhost="$MARIADB_HOST" --dbname="$MARIADB_DATABASE" --dbuser="$MARIADB_USER" --dbpass="$MARIADB_PASSWORD"
 	wp core install --url="$WP_URL:$WP_PORT" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER"	\
 		--admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL" --skip-email
-	wp plugin update --all
+	# to work with redis and use it as a cache
+	setup_redis_cache
 	wp theme activate twentytwenty
 
 	# populate wordpress website with some dummy content
