@@ -3,6 +3,8 @@ version: "3"
 services:
 
   wordpress:
+    depends_on:
+      - mariadb
     build:
       context: ./wordpress
     image: wordpress
@@ -58,6 +60,7 @@ services:
       - PHP_FPM_PORT=${PHP_FPM_PORT}
     volumes:
       - wordpress-volume:/var/www/wordpress
+      - certs-volume:${CERTS_DIR}
     restart: unless-stopped 
 
   # ------------------------------------------------------------------------- #
@@ -69,6 +72,24 @@ services:
     image: redis
     environment:
       - REDIS_PORT=${REDIS_PORT}
+
+  # ------------------------------------------------------------------------- #
+
+  ftp:
+    depends_on:
+      - nginx
+    build:
+      context: ./ftp
+    container_name: "inception_wordpress_ftp"
+    image: ftp
+    volumes:
+      - wordpress-volume:/home/ftp_user
+      - certs-volume:${CERTS_DIR}
+    environment:
+      - CERTS_DIR=${CERTS_DIR}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    ports:
+      - "21:21"
 
 volumes:
   mariadb-volume:
@@ -83,3 +104,6 @@ volumes:
       type: none
       device: ${WP_HOST_VOLUME_PATH}
       o: bind
+  # volume dedicated to storing TLS certificate
+  certs-volume:
+    driver: local
