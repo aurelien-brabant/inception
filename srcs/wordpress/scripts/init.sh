@@ -1,15 +1,5 @@
 #! /bin/bash
 
-function setup_redis_cache()
-{
-	wp plugin install redis-cache --activate
-	wp plugin update --all
-	cat /tmp/config/redis-config.php ./wp-config.php > .redis_setup_tmp
-	cat .redis_setup_tmp > wp-config.php
-	rm -rf .redis_setup_tmp
-	wp redis enable
-}
-
 i=0
 while ! mariadb -h$MARIADB_HOST -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_PASSWORD; do
 	if [ $i -ge 60 ]; then
@@ -30,7 +20,8 @@ if [ "$(mariadb -h${MARIADB_HOST} -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_P
 	wp core install --url="$WP_URL:$WP_PORT" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER"	\
 		--admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL" --skip-email
 	# to work with redis and use it as a cache
-	setup_redis_cache
+	wp plugin install redis-cache --activate
+	wp plugin update --all
 	wp theme activate twentytwenty
 
 	# populate wordpress website with some dummy content
@@ -47,6 +38,23 @@ if [ "$(mariadb -h${MARIADB_HOST} -P${MARIADB_PORT} -u$MARIADB_USER -p$MARIADB_P
 	# test file which will be used by the wordpress action to ensure php-fpm works as expected.
 	echo "<?php echo 'php-fpm works' ?>" > $PWD/test.php
 fi
+
+# redis-cache configuration, and enable it. 
+cat /tmp/config/redis-config.php ./wp-config.php > .redis_setup_tmp
+cat .redis_setup_tmp > wp-config.php
+rm -rf .redis_setup_tmp
+
+# Wait for redis to answer to the ping before trying to monitor it
+i=1;
+while [ "$(redis-cli -p ${REDIS_PORT} -h ${REDIS_HOST} ping 2> /dev/null)" != "PONG" ]; do
+	if [ $i -ge 60 ]; then
+		printf "redis-server took too much time to start properly!\n"
+		exit 1
+	fi
+	printf "Waiting for redis-server to respond to ping... ($i/60 sec)\n"
+	i=$(($i+1))
+done
+wp redis enable
 
 # ----- PHP-FPM ----- #
 

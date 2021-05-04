@@ -91,6 +91,22 @@ services:
     ports:
       - "21:21"
 
+  # ------------------------------------------------------------------------- #
+
+  adminer:
+    depends_on:
+      - mariadb
+    build:
+      context: ./adminer
+    container_name: "inception_adminer"
+    image: adminer
+    environment:
+      - CERTS_DIR=${CERTS_DIR}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - ADMINER_PORT=${ADMINER_PORT}
+    ports:
+      - "5000:5000"
+
 volumes:
   mariadb-volume:
     driver: local

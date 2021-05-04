@@ -10,7 +10,8 @@ RUN 	apk -U upgrade && apk add	php7				\
 									php7-pecl-mailparse	\
 									curl				\
 									mariadb-client		\
-									bash
+									bash				\
+									redis				# for redis-cli
 
 # The wordpress installation directory
 
