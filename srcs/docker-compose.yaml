@@ -107,6 +107,16 @@ services:
     ports:
       - "5000:5000"
 
+  # ------------------------------------------------------------------------- #
+
+  aurelienbrabant.fr:
+    build:
+      context: ./aurelienbrabant.fr
+    container_name: "inception_aurelienbrabant.fr"
+    image: aurelienbrabant.fr
+    ports:
+      - "3000:3000"
+
 volumes:
   mariadb-volume:
     driver: local

@@ -1,0 +1,116 @@
+/* disable traditional link style */
+
+.header a {
+	color: inherit;
+}
+
+.header a:hover {
+	text-decoration: none;
+}
+
+.header {
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	color: #000000;
+	position: fixed;
+	box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+	background-color: #fff;
+	font-size: 0.8em;
+	z-index: 999;
+	transition: top .2s;
+}
+
+.header.headerHidden {
+	top: -100px;
+}
+
+.headerBlock {
+	padding: 5px 20px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.headerRight {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.navbar {
+	margin-bottom: 0.3em;
+}
+
+.navbar ul {
+	display: flex;
+	list-style-type: none;
+	padding-left: 0;
+	font-size: 1rem;
+	text-transform: uppercase;
+	margin: 5px 0 0 0;
+}
+
+.navbar ul li {
+	margin: 0 0.3em;
+}
+
+.navbar ul li a {
+	color: inherit;
+	text-decoration: none;
+	opacity: 0.8;
+	transition: all .2s;
+}
+
+.navbar ul li a:hover {
+	opacity: 1;
+}
+
+.title {
+	font-family: JetBrains;
+	font-size: 1.7em;
+}
+
+.title, .subtitle {
+	padding: 0;
+	margin:  0;
+}
+
+.subtitle {
+	display: none;
+	font-weight: 400;
+}
+
+.logoWrapper {
+	display: flex;
+	align-items: center;
+}
+
+.logoIcon {
+	font-size: 3em;	
+	margin-right: 0.3em;
+}
+
+@media screen and (min-width: 600px) {
+	.header {
+		height: 80px;	
+	}
+	.headerBlock {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+	.subtitle {
+		display: block;
+	}
+	.navbar {
+		margin: 0 10px 0 0;
+	}
+	.headerRight {
+		flex-direction: row;
+	}
+}
+
+

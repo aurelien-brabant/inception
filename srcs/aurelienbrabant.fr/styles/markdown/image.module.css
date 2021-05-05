@@ -1,0 +1,12 @@
+.img {
+	height: auto;
+	max-width: 100%;
+	display: block;
+	margin: 0 auto;
+	max-height: 500px;
+	transition: opacity .2s;
+}
+
+.img:hover {
+	opacity: 0.8;
+}

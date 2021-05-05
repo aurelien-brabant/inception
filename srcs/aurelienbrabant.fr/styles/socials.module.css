@@ -1,0 +1,14 @@
+.socialsWrapper {
+	display: flex;
+	font-size: 1.8em;
+}
+
+.socialsWrapper a {
+	margin-right: 0.5em;
+	opacity: 0.85;
+	transition: all .2s;
+}
+
+.socialsWrapper a:hover {
+	opacity: 1;
+}
