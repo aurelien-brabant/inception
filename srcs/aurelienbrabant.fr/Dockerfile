@@ -10,7 +10,7 @@ RUN			mkdir -p /usr/app
 WORKDIR		/usr/app
 
 # Copy all the files, expected those listed in the .dockerignore file.
-COPY 		./ . /
+COPY 		. .
 
 # Install and build the NextJS web application
 RUN			yarn install && yarn build

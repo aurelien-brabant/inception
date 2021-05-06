@@ -51,6 +51,7 @@ services:
     container_name: "inception_nginx"
     image: nginx
     ports:
+      - "80:80"
       - "443:443"
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
@@ -100,20 +101,23 @@ services:
       context: ./adminer
     container_name: "inception_adminer"
     image: adminer
+    volumes:
+      - certs-volume:${CERTS_DIR}
     environment:
       - CERTS_DIR=${CERTS_DIR}
       - DOMAIN_NAME=${DOMAIN_NAME}
       - ADMINER_PORT=${ADMINER_PORT}
+      - TLS_VERSION=${TLS_VERSION}
     ports:
       - "5000:5000"
 
   # ------------------------------------------------------------------------- #
 
-  aurelienbrabant.fr:
+  aurelienbrabant:
     build:
       context: ./aurelienbrabant.fr
-    container_name: "inception_aurelienbrabant.fr"
-    image: aurelienbrabant.fr
+    container_name: "inception_aurelienbrabant"
+    image: aurelienbrabant
     ports:
       - "3000:3000"
 
