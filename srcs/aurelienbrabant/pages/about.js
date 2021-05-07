@@ -12,7 +12,7 @@ export default function About() {
 			>
 				<div className={styles.wrapper}>
 					<h1>About</h1>
-					<img src="/nextjs-public/imgs/me.png" />
+					<img src="/blog/imgs/me.png" />
 					<div className={styles.presentation}>
 						<div>
 							<h3>Hey !</h3>
