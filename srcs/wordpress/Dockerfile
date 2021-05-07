@@ -54,6 +54,7 @@ COPY			./config/www.conf /etc/php7/php-fpm.d/www.conf
 # Make the startup script available as /init.sh inside the container
 
 COPY			./config /config
+COPY			./config/wp-config.php ./
 COPY			./scripts/entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT		[ "bash", "/entrypoint.sh" ]
