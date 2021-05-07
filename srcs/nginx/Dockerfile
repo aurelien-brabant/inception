@@ -16,4 +16,6 @@ ENV			CERTS_DIR=/etc/openssl	\
 
 COPY		./scripts/entrypoint.sh /entrypoint.sh
 
+EXPOSE		443
+
 ENTRYPOINT	[ "sh", "entrypoint.sh" ]
