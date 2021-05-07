@@ -6,7 +6,7 @@
 #    By: abrabant <abrabant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/13 23:04:39 by abrabant          #+#    #+#              #
-#    Updated: 2021/05/02 01:43:46 by abrabant         ###   ########.fr        #
+#    Updated: 2021/05/07 17:11:02 by abrabant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,10 @@ RUN			chown -R mysql:mysql /etc/my.cnf.d
 COPY		./scripts /tmp/scripts
 COPY		./config/runtime_config.sql /tmp/config/runtime_config.sql
 RUN			chown -R mysql:mysql /tmp/config &&	\
-			chown -R mysql:mysql /tmp/scripts &&	\
-			chmod +x /tmp/scripts/*.sh
+			chown -R mysql:mysql /tmp/scripts 
 
 WORKDIR		/tmp/scripts
 
 USER		mysql
 
-CMD			[ "./init.sh" ]
+ENTRYPOINT	[ "sh", "entrypoint.sh" ]

@@ -24,4 +24,4 @@ COPY		./config/nginx.default.conf /etc/nginx/http.d/default.conf
 
 COPY		./scripts/entrypoint.sh .
 
-CMD			[ "sh", "entrypoint.sh" ]
+ENTRYPOINT			[ "sh", "entrypoint.sh" ]

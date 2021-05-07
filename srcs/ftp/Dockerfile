@@ -8,4 +8,4 @@ COPY		./scripts/entrypoint.sh /entrypoint.sh
 
 EXPOSE		21
 
-CMD			[ "sh", "./entrypoint.sh" ]
+ENTRYPOINT	[ "sh", "entrypoint.sh" ]
