@@ -118,8 +118,6 @@ services:
       context: ./aurelienbrabant
     container_name: "inception_aurelienbrabant"
     image: aurelienbrabant
-    ports:
-      - "3000:3000"
 
 volumes:
   mariadb-volume:
