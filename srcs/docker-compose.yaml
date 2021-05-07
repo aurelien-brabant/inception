@@ -51,7 +51,6 @@ services:
     container_name: "inception_nginx"
     image: nginx
     ports:
-      - "80:80"
       - "443:443"
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
@@ -108,14 +107,12 @@ services:
       - DOMAIN_NAME=${DOMAIN_NAME}
       - ADMINER_PORT=${ADMINER_PORT}
       - TLS_VERSION=${TLS_VERSION}
-    ports:
-      - "5000:5000"
 
   # ------------------------------------------------------------------------- #
 
   aurelienbrabant:
     build:
-      context: ./aurelienbrabant.fr
+      context: ./aurelienbrabant
     container_name: "inception_aurelienbrabant"
     image: aurelienbrabant
     ports:

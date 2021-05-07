@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Roboto";
-	src: url("/fonts/roboto/Roboto-Regular.ttf");
+	src: url("/blog/fonts/roboto/Roboto-Regular.ttf");
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
 	font-family: "JetBrains";
-	src: url("/fonts/jetbrains/static/JetBrainsMono-Regular.ttf");
+	src: url("/blog/fonts/jetbrains/static/JetBrainsMono-Regular.ttf");
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
 	font-family: "Terminus";
-	src: url("/fonts/terminus/terminus_500.ttf");
+	src: url("/blog/fonts/terminus/terminus_500.ttf");
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
