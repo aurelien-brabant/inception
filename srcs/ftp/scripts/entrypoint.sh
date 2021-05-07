@@ -11,7 +11,9 @@ while ! test -f "${CERTS_DIR}/${DOMAIN_NAME}.crt" || ! test -f "${CERTS_DIR}/${D
 	sleep 1
 done
 
-chgrp -R ftp_user /home/ftp_user
-chmod -R g-w /home/ftp_user
+{ echo "$FTP_PASSWORD"; echo "$FTP_PASSWORD"; } | adduser $FTP_USER
+
+chgrp -R $FTP_USER /home/$FTP_USER
+chmod -R g-w /home/$FTP_USER
 
 vsftpd /etc/vsftpd/vsftpd.conf

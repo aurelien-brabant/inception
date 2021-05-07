@@ -78,16 +78,19 @@ services:
   ftp:
     depends_on:
       - nginx
+      - wordpress
     build:
       context: ./ftp
     container_name: "inception_wordpress_ftp"
     image: ftp
     volumes:
-      - wordpress-volume:/home/ftp_user
+      - wordpress-volume:/home/${FTP_USER}
       - certs-volume:${CERTS_DIR}
     environment:
       - CERTS_DIR=${CERTS_DIR}
       - DOMAIN_NAME=${DOMAIN_NAME}
+      - FTP_USER=${FTP_USER}
+      - FTP_PASSWORD=${FTP_PASSWORD}
     ports:
       - "21:21"
 
