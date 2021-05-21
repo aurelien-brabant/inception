@@ -3,7 +3,7 @@
 
 # inception
 
-Inception is a system administration and networking project involving docker and docker-compose, asking us to setup
+Inception is a school 42 system administration and networking project involving docker and docker-compose, asking us to setup
 multiple docker containers that work together as a complete infrastructure.
 
 I decided to reuse an old version of my website https://aurelienbrabant.fr for the static website bonus.
@@ -12,8 +12,8 @@ I decided to reuse an old version of my website https://aurelienbrabant.fr for t
 
 ## Requirements
 
-- docke
-- docker-compose **> 1.29.2**, I'm not sure but I had some issue related to .env parsing with previous versions.
+- docker
+- docker-compose version **> 1.29.2**, I'm not sure but I had some issue related to .env parsing with previous versions.
 
 ## Deploy the infrastructure
 
