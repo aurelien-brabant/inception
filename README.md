@@ -13,7 +13,7 @@ I decided to reuse an old version of my website https://aurelienbrabant.fr for t
 ## Requirements
 
 - docker
-- docker-compose version **> 1.29.2**, I'm not sure but I had some issue related to .env parsing with previous versions.
+- docker-compose **version** **>= 1.29.2**, I'm not sure but I had some issue related to .env parsing with previous versions.
 
 ## Deploy the infrastructure
 
